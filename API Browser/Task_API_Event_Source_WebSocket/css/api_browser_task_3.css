@@ -1,0 +1,126 @@
+@import url("./zero_styles.css");
+
+.container {
+  background-color: #303030;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 18px;
+  line-height: 22px;
+}
+.container_api_box {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  width: 500px;
+  height: 700px;
+  background-color: #8b0bda;
+  border: solid 5px #8b0bda;
+  border-radius: 5px;
+}
+.container_message_area {
+  margin-bottom: 3px;
+  width: 490px;
+  height: 656px;
+  background-color: #181818;
+  overflow-y: scroll;
+  border-radius: 5px;
+}
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #5a5a5a;
+  border: #8b0bda solid 2px;
+  border-radius: 5px;
+}
+
+.container_instuments_box {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+.container_message_in_come {
+  width: 330px;
+  height: 30px;
+  border-radius: 3px;
+  padding: 5px;
+  font-size: 18px;
+}
+.container_btn_send_message {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 125px;
+  height: 30px;
+  padding: 3px;
+  border-radius: 3px;
+  font-size: 18px;
+  line-height: 22px;
+}
+.geo {
+  background-image: url("../images/klipartz.com.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  height: 25px;
+  width: 25px;
+  background-color: aliceblue;
+  border-radius: 50%;
+}
+.sending {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.answer {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.sending_message_box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #8a8a8a;
+  height: 50px;
+  padding: 20px;
+  margin: 10px;
+  border-radius: 25px 0 25px 25px;
+  color: #fff;
+  font-size: 18px;
+  line-height: 22px;
+}
+
+.answer_message_box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #3a3a3a;
+  height: 50px;
+  padding: 20px;
+  margin: 10px;
+  border-radius: 0 25px 25px 25px;
+  color: #fff;
+  font-size: 18px;
+  line-height: 22px;
+}
+.geoposition {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.geoposition_message_box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #8a8a8a;
+  height: 50px;
+  padding: 20px;
+  margin: 10px;
+  border-radius: 25px 0 25px 25px;
+  color: #fff;
+  font-size: 18px;
+  line-height: 22px;
+}
