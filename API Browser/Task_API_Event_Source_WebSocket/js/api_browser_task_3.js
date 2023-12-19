@@ -17,37 +17,63 @@
 const sendMessage = document.querySelector(".container_btn_send_message");
 let writeMessage = document.querySelector(".container_message_in_come");
 const messageOut = document.querySelector(".container_message_area");
-const containerMessage = document.querySelector(".container_message");
 const geolocation = document.querySelector(".geo");
 let websocket = new WebSocket("wss://echo-ws-service.herokuapp.com");
 
 sendMessage.addEventListener("click", () => {
-  messageOut.innerHTML += `<div class= "sending"><div class="sending_message_box"><p>${writeMessage.value}</p></div></div>`;
-  websocket.send(writeMessage.value);
+  if (writeMessage.value == "") {
+  } else {
+    messageOut.innerHTML += `<div class= "sending"><div class="sending_message_box"><p>${writeMessage.value}</p></div></div>`;
+    websocket.send(writeMessage.value);
+    scrollMessage(0, 1e9);
+
+    websocket.onmessage = function (event) {
+      messageOut.innerHTML += `<div class="answer"><div class="answer_message_box"><p>${writeMessage.value}</p></div></div>`;
+      writeMessage.value = "";
+      scrollMessage(0, 1e9);
+    };
+  }
 });
-websocket.onmessage = function (event) {
-  messageOut.innerHTML += `<div class="answer"><div class="answer_message_box"><p>${writeMessage.value}</p></div></div>`;
-  writeMessage.value = "";
-};
+enterPress();
 
 geolocation.addEventListener("click", () => {
   if ("geolocation" in navigator) {
     const success = (position) => {
       const latitude = position.coords.latitude;
-      const longitude = position.coords.longitude;      
-      const geoLink = `https://www.openstreetmap.org/#map=6/${latitude}/${longitude}`;      
-      fetch(geoLink)
-        .then((response) => response.json())
-        .then((data) => {          
-          messageOut.innerHTML = `<div class="geoposition"><div class="geoposition_message_box"><a href="https://www.openstreetmap.org/#map=6/${latitude}/${longitude}">Гео-локация</a></div></div>`;
-        });
+      const longitude = position.coords.longitude;
+      const geoLink = `https://www.openstreetmap.org/#map=6/${latitude}/${longitude}`;
+      messageOut.innerHTML += `<div class="geoposition"><div class="geoposition_message_box"><a href="https://www.openstreetmap.org/#map=6/${latitude}/${longitude}">Гео-локация</a></div></div>`;
+      scrollMessage(0, 1e9);
     };
     const error = () => {
-      alert("error");
+      alert("геолокация выключена или браузер не поддерживает данную функцию");
     };
-
     navigator.geolocation.getCurrentPosition(success, error);
   } else {
     alert("Ваш браузер не поддерживает определения геопозиции");
   }
 });
+
+function enterPress() {
+  document
+    .querySelector(".container_message_in_come")
+    .addEventListener("keydown", function (e) {
+      if (e.keyCode === 13) {
+        if (writeMessage.value == "") {
+        } else {
+          messageOut.innerHTML += `<div class= "sending"><div class="sending_message_box"><p>${writeMessage.value}</p></div></div>`;
+          websocket.send(writeMessage.value);
+          scrollMessage(0, 1e9);
+          websocket.onmessage = function (event) {
+            messageOut.innerHTML += `<div class="answer"><div class="answer_message_box"><p>${writeMessage.value}</p></div></div>`;
+            writeMessage.value = "";
+            scrollMessage(0, 1e9);
+          };
+        }
+      }
+    });
+}
+
+function scrollMessage(x, y) {
+  messageOut.scrollBy(x, y);
+}
