@@ -34,16 +34,11 @@ geolocation.addEventListener("click", () => {
   if ("geolocation" in navigator) {
     const success = (position) => {
       const latitude = position.coords.latitude;
-      const longitude = position.coords.longitude;
-      console.log(`${latitude}  ${longitude}`);
-      const geoLink = `https://www.openstreetmap.org/#map=6/${latitude}/${longitude}`;
-      console.log(
-        `https://www.openstreetmap.org/#map=6/${latitude}/${longitude}`
-      );
+      const longitude = position.coords.longitude;      
+      const geoLink = `https://www.openstreetmap.org/#map=6/${latitude}/${longitude}`;      
       fetch(geoLink)
         .then((response) => response.json())
-        .then((data) => {
-          console.log(data);
+        .then((data) => {          
           messageOut.innerHTML = `<div class="geoposition"><div class="geoposition_message_box"><a href="https://www.openstreetmap.org/#map=6/${latitude}/${longitude}">Гео-локация</a></div></div>`;
         });
     };
